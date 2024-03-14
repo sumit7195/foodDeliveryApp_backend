@@ -21,8 +21,6 @@ export const jwtCheck = auth({
   
 export const jwtParse = async (req: Request, res: Response, next:NextFunction) => {
     const { authorization } = req.headers;
-
-    console.log("authorization: " , authorization)
     
     // Bearer lfkskflsflsklf
     if (!authorization || !authorization.startsWith('Bearer')) {
@@ -37,8 +35,6 @@ export const jwtParse = async (req: Request, res: Response, next:NextFunction) =
          const auth0Id = decoded.sub;
 
          const user = await User.findOne({ auth0Id })
-
-         console.log("user: " , user)
         
          if (!user) {
              return res.sendStatus(401)
